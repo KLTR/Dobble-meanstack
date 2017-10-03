@@ -1,0 +1,23 @@
+header {
+    background-image: linear-gradient(#04519b, #044687 60%, #033769);
+    color: #fff;
+    min-height: 100px;
+    padding-top: 25px;
+}
+.navbar{
+             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+
+}
+form {
+    float: right;
+}
+
+img{
+    height: 55px;
+    width: 105px;
+}
+/* .navbar-left {
+    position: absolute;
+    left: 50px;
+} */

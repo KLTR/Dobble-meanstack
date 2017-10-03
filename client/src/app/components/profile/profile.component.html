@@ -1,0 +1,148 @@
+<div id="myFriends" class="col-md-8" *ngIf="user">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="header">{{user.first_name}} {{user.last_name}}</h2>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="file" (change)="fileChangeEvent($event)" title=" " name="file" id="file" class="inputfile" />
+
+                    <div *ngIf="!userImg">
+                        <img [src]="defaultImg" class="img-thumbnail img-circle" alt="">
+                    </div>
+                    <div *ngIf="userImg">
+                        <img [src]="userImg" class="img-thumbnail img-circle" alt="">
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <ul>
+                        <div class="panel panel-default panel-thought">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Thought of the day</h3>
+                            </div>
+
+                            <div class="panel-body panel-body-profile">
+                                <form>
+                                    <div class="form-group row">
+                                        <div class="col-md-8">
+                                            <textarea class="form-control  form-control-profile" [(ngModel)]="thoughtContent" name='thoughtContent' placeholder="Share your thoughts with your friends"></textarea>
+                                            <input class="form-control imgUpInput" type="text" placeholder="Insert image URL here" [(ngModel)]="thoughtImage" name="thoughtImage">
+                                            <span><fa class="imgUp" name="picture-o" size="2x"></fa></span>
+                                        </div>
+                                        <div *ngIf='thoughtImage' class="col-md-4">
+                                            <img style="height: 290px" [src]="thoughtImage" class="img-thumbnail" alt="upload and image !">
+                                        </div>
+                                        <div *ngIf='!thoughtImage' class="col-md-4">
+                                            <img style="height: 290px" [src]="defaultCoverImg" class="img-thumbnail" alt="upload and image !">
+                                        </div>
+                                    </div>
+                                    <button (click)="addThought()" class="btn btn-primary pull-right"> <fa  name="pencil-square-o"></fa>Share Your Thought</button>
+                                    <div class="pull-right">
+                                        <div class="btn-toolbar">
+                                            <!-- <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button>
+                                    <button type="button" class="btn btn-default"><i class="fa fa-file-image-o"></i>Image</button>
+                                    <button type="button" class="btn btn-default"><i class="fa fa-file-video-o"></i>Video</button> -->
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </ul>
+                </div>
+            </div><br><br>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Profile Wall</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form (submit)="addPost()">
+                            <div class="form-group">
+                                <textarea class="form-control " [(ngModel)]="content" name='content' placeholder="Write on the wall"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary pull-right" value="Post"> <fa  name="pencil-square-o"></fa>Write</button>
+                            <div class="pull-right">
+                                <div class="btn-toolbar">
+                                    <!-- <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button>
+                                    <button type="button" class="btn btn-default"><i class="fa fa-file-image-o"></i>Image</button>
+                                    <button type="button" class="btn btn-default"><i class="fa fa-file-video-o"></i>Video</button> -->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <div *ngFor='let post of posts' class="panel panel-default post">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <a class="post-avatar thumbnail"><img class="img-circle" [src]="userImg">
+                                    <div class="text-center">{{post.author}}</div>
+                                </a>
+                                <div class="likes text-center">
+                                    <fa (click)="showLikes(post._id)" name="thumbs-o-up"></fa>{{post.likes.length}}
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="bubble">
+                                    <div class="pointer">
+                                        <p>{{post.content}}</p>
+                                    </div>
+                                    <div class="pointer-border"></div>
+                                </div>
+                                <p class="post-actions"><a>Comment</a> - <a (click)="likePost(post._id)">Like</a> - <a (click)="deletePost(post._id)">Delete</a> </p>
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <input #commentContnetInput type="text" name='commentContent' class="form-control" placeholder="Enter Comment">
+                                    </div>
+                                    <button (click)="addComment(post._id, commentContnetInput.value)" class="btn btn-default">Comment</button>
+                                </form>
+                                <div *ngFor='let comment of post.comments' class="comment">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <a class="post-avatar thumbnail "><img class="img-circle commentImg" [src]='sanitize(comment.userImg)'></a>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <div class="commentBubble">
+                                                <div class="pointer">
+                                                    <p>{{comment.content}}</p>
+                                                </div>
+                                                <div class="pointer-border"></div>
+                                            </div>
+                                            <div class="text-right">
+                                                <fa name="calendar"></fa>{{comment.date}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="text-right">
+                                    <fa name="calendar"></fa>{{post.date}}
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-friends></app-friends>
+<!-- <div *ngIf='posts'>
+                    <div *ngFor='let post of posts' class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">By : {{post.author}} <span class="pull-right">Date : {{post.date}}</span></h3>
+                        </div>
+                        <div class="panel-body">
+                            {{post.content}}
+                            <button (click)="deletePost(post._id)" class="btn btn-default pull-right"> <fa name='trash-o' ></fa>Delete</button>
+                        </div>
+                    </div>
+                </div> -->

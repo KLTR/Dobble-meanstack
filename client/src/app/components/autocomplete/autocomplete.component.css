@@ -1,0 +1,49 @@
+#search label {
+    position: absolute;
+    left: 15px;
+    top: 42px;
+}
+
+#search {
+    position: relative;
+    font-size: 18px;
+    padding-top: 33px;
+    margin: -20px auto 0;
+    width: 20vw !important;
+}
+
+.search-block {}
+
+.form-control,
+input {
+    text-align: center
+}
+
+fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    float: left
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+#search #search-clear {
+    text-decoration: none;
+    position: absolute;
+    right: 18px;
+    top: 48px;
+    color: #b3b3b3;
+}

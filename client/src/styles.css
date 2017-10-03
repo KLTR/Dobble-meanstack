@@ -1,0 +1,138 @@
+/* You can add global styles to this file, and also import other style files */
+
+.btn {
+    transition: 1s;
+}
+
+.img {
+    transition: 1s;
+}
+
+a {
+    transition: 1s;
+}
+
+.btn {
+    border-radius: 22.5px !important;
+}
+
+.thumbnail {
+    border-radius: 30px !important;
+}
+
+.panel-body {
+    padding: 10px !important;
+}
+
+.btn {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+/* .bubble {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.bubble:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+} */
+
+.panel {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.panel-heading {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.panel-body {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.panel:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.panel-body:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+fa {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+fa:hover {
+    box-shadow: 0 12px 20px 0 rgba(0, 0, 0, 0.2);
+    top: 15px;
+    /* transition: 1s; */
+}
+
+.thumbnail {
+    border: none !important;
+}
+
+.img-circle {
+    height: 150px;
+    width: 150px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.img-circle:hover {
+    box-shadow: 0 12px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    top: 15px;
+    transition: 1s
+}
+
+.navbar-brand {
+    top: 5px;
+}
+
+.comment {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 110px;
+    padding: 3px;
+    margin: 5px 0;
+    overflow: auto;
+    width: 100%;
+    padding: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.commentImg {
+    height: 90px;
+    width: 110px;
+    margin: 0
+}
+
+.commentBubble {
+    margin-top: 15px;
+    position: relative;
+    min-height: 55px;
+    padding: 3px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.bubble {
+    position: relative;
+    min-height: 80px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}

@@ -1,0 +1,59 @@
+<nav class="navbar navbar-default ">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                    <a [routerLink]="['/']" class="navbar-brand">Dobble</a>
+                </li>
+                <!-- <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/']">Home</a> </li> -->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li *ngIf="authService.loggedIn()">
+                    <div class="search-block">
+                        <app-autocomplete></app-autocomplete>
+                    </div>
+                </li>
+                <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                    <a [routerLink]="['/dashboard']">
+                        <fa name="globe" size='2x'></fa>
+                    </a>
+                </li>
+                <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                    <a [routerLink]="['/profile']">
+                        <fa name="user-circle" size='2x'></fa>
+                    </a>
+                </li>
+                <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                    <a [routerLink]="['/members']">
+                        <fa name="users" size='2x'></fa>
+                    </a>
+                </li>
+
+                <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                    <a [routerLink]="['/login']">
+                        <fa name="sign-in" size='2x'></fa>
+                    </a>
+                </li>
+                <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                    <a [routerLink]="['/register']">
+                        <fa name="user-plus" size='2x'></fa>
+                    </a>
+                </li>
+                <li *ngIf="authService.loggedIn()">
+                    <a (click)="onLogoutClick()" href="#">
+                        <fa name="sign-out" size='2x'></fa>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>

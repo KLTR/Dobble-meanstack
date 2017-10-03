@@ -1,0 +1,7 @@
+<section *ngIf="userNames.length > 0" id="search">
+    <label for="search-input"><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only text-center">Search Users..</span></label>
+    <ng-select [allowClear]="true" [items]="userNames" (data)="refreshValue($event)" (selected)="selected($event)" (removed)="removed($event)" (typed)="typed($event)" placeholder="No user selected">
+    </ng-select>
+    <!-- <input #searchTextBox (keyup)="onKeyUp(searchTextBox.value)" [(ngModel)]="searchText" id="search-input" class="form-control " placeholder="Search Users" autocomplete="off" spellcheck="false" autocorrect="off" tabindex="1"> -->
+    <!-- <a id="search-clear" (click)="clearSearch()" class="fa fa-times-circle" aria-hidden="true"><span  class="sr-only">Clear search</span></a> -->
+</section>

@@ -1,0 +1,20 @@
+<div class="container">
+
+    <div class="panel panel-default friends">
+        <div class="panel-heading">
+            <h2 class="header">Members</h2>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li *ngFor="let user of users">
+                    <p class="text-primary">{{user.first_name}} {{user.last_name}}</p>
+
+                    <a class="thumbnail"><img class='img-circle' style="height:143px; width:145px" src={{user.avatar}} alt="">
+                    </a>
+                    <button (click)="addFriend(user.username)" class="btn btn-primary btn-add"><fa name="user-plus"  size='2x'></fa></button>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

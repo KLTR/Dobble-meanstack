@@ -1,0 +1,70 @@
+<div id="myFriends" class="col-md-8" *ngIf="user">
+    <div class="profile">
+        <h1 class="page-header">{{user.first_name}} {{user.last_name}}</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <div>
+                    <img  src="{{user.avatar}}" class="img-thumbnail img-circle" alt="">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <ul>
+                    <li (click)='checkUser()'><strong>Name:</strong>{{user.first_name}} {{user.last_name}}</li>
+                    <li><strong>Email:</strong>{{user.email}}</li>
+                </ul>
+            </div>
+        </div><br><br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Profile Wall</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div *ngFor='let post of posts' class="panel panel-default post">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+
+                                        <a  class="post-avatar thumbnail"><img class="img-circle" src={{user.avatar}}>
+                                            <div class="text-center">{{post.author}}</div>
+                                        </a>
+                                        <div class="likes text-center">
+                                            <fa (click)="showLikes(post._id)" name="thumbs-o-up"></fa>{{post.likes.length}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="bubble">
+                                            <div class="pointer">
+                                                <p>{{post.content}}</p>
+                                            </div>
+                                            <div class="pointer-border"></div>
+                                        </div>
+                                        <p class="post-actions"><a (click)="likePost(post._id)">Like</a></p>
+
+                                        <div class="clearfix"></div>
+                                        <div class="text-right">
+                                            <fa name="calendar"></fa>{{post.date}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-friends></app-friends>
+<!-- <div *ngIf='posts'>
+                  <div *ngFor='let post of posts' class="panel panel-default">
+                      <div class="panel-heading">
+                          <h3 class="panel-title">By : {{post.author}} <span class="pull-right">Date : {{post.date}}</span></h3>
+                      </div>
+                      <div class="panel-body">
+                          {{post.content}}
+                          <button (click)="deletePost(post._id)" class="btn btn-default pull-right"> <fa name='trash-o' ></fa>Delete</button>
+                      </div>
+                  </div>
+              </div> -->
