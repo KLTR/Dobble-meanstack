@@ -96,16 +96,20 @@ export class ProfileComponent implements OnInit {
 
   getUrlFromFirebase(username) {
   const storageRef = firebase.storage().ref().child('userImgs/' + username + '-avatar.jpg');
-     storageRef.getDownloadURL().then(url => {this.userImg = url; this.postImg = url;});
+     storageRef.getDownloadURL().then(url => {this.userImg = url;});
     
   }
 
   uploadPostImg(event){
-
+    let storageRef;
     this.uuidv4 = UUID.UUID();
     console.log(this.uuidv4)
     var postIndex = this.posts.length
-    this.userService.uploadPostImgToFirebase(event, this.uuidv4);
+    this.userService.uploadPostImgToFirebase(event, this.uuidv4).then(() => {
+    storageRef = firebase.storage().ref().child('postImgs/' + this.uuidv4 + '.jpg')
+     storageRef.getDownloadURL().then(url => {this.postImg = url;})
+    });
+
   }
 
     sanitize(url: string) {
@@ -136,6 +140,7 @@ addPost() {
     postImg: ''
   };
   this.content = ' ';
+  this.postImg = ''
     const storageRef = firebase.storage().ref().child('postImgs/' + this.uuidv4 + '.jpg');
     storageRef.getDownloadURL().then(url => {post.postImg = url;
     this.userService.addPost(post).subscribe(res => { this.userService.getMyPosts(this.user).subscribe((res) => this.posts = res.posts);});

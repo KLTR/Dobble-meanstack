@@ -10,6 +10,6 @@ export class User {
       public thought = {
       author: String,
       content: String,
-      img:String
+      img: String
     }
 }

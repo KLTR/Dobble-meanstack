@@ -4,14 +4,31 @@
         <div class="row">
             <div class="col-md-4">
                 <div>
-                    <img  src="{{user.avatar}}" class="img-thumbnail img-circle" alt="">
+                    <img src="{{user.avatar}}" class="img-thumbnail img-circle" alt="">
                 </div>
             </div>
-            <div class="col-md-8">
-                <ul>
-                    <li (click)='checkUser()'><strong>Name:</strong>{{user.first_name}} {{user.last_name}}</li>
-                    <li><strong>Email:</strong>{{user.email}}</li>
-                </ul>
+            <div *ngIf='user.thought' class="col-md-8">
+                <div class="panel panel-default panel-thought">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Thought of the day</h3>
+                    </div>
+
+                    <div class="panel-body panel-body-profile">
+                        <form>
+                            <div class="form-group row">
+                                <div class="col-md-8">
+                                    <p style="height: 290px;" class="form-control  form-control-profile">{{user.thought.content}}</p>
+                                </div>
+                                <div *ngIf='user.thought.img' class="col-md-4">
+                                    <img style="height: 290px" [src]="user.thought.img" class="img-thumbnail" alt="upload and image !">
+                                </div>
+                            </div>
+                            <div class="pull-right">
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
             </div>
         </div><br><br>
         <div class="row">
@@ -26,7 +43,7 @@
                                 <div class="row">
                                     <div class="col-md-2">
 
-                                        <a  class="post-avatar thumbnail"><img class="img-circle" src={{user.avatar}}>
+                                        <a class="post-avatar thumbnail"><img class="img-circle" src={{user.avatar}}>
                                             <div class="text-center">{{post.author}}</div>
                                         </a>
                                         <div class="likes text-center">
@@ -34,11 +51,13 @@
                                         </div>
                                     </div>
                                     <div class="col-md-10">
-                                        <div class="bubble">
-                                            <div class="pointer">
+                                        <div class="bubble row">
+                                            <div class="pointer col-md-8">
                                                 <p>{{post.content}}</p>
                                             </div>
-                                            <div class="pointer-border"></div>
+                                            <div class="pointer-border col-md-4">
+                                                <img *ngIf="post.postImg;" class="post-img" [src]="post.postImg">
+                                            </div>
                                         </div>
                                         <p class="post-actions"><a (click)="likePost(post._id)">Like</a></p>
 
@@ -57,14 +76,3 @@
     </div>
 </div>
 <app-friends></app-friends>
-<!-- <div *ngIf='posts'>
-                  <div *ngFor='let post of posts' class="panel panel-default">
-                      <div class="panel-heading">
-                          <h3 class="panel-title">By : {{post.author}} <span class="pull-right">Date : {{post.date}}</span></h3>
-                      </div>
-                      <div class="panel-body">
-                          {{post.content}}
-                          <button (click)="deletePost(post._id)" class="btn btn-default pull-right"> <fa name='trash-o' ></fa>Delete</button>
-                      </div>
-                  </div>
-              </div> -->

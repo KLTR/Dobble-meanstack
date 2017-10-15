@@ -57,8 +57,13 @@
                     </div>
                     <div class="panel-body">
                         <form (submit)="addPost()">
-                            <div class="form-group">
-                                <textarea class="form-control " [(ngModel)]="content" name='content' placeholder="Write on the wall"></textarea>
+                            <div class="form-group row">
+                                <div class="col-md-8">
+                                    <textarea class="form-control " [(ngModel)]="content" name='content' placeholder="Write on the wall"></textarea>
+                                </div>
+                                <div style="height: 200px;" class="pointer-border col-md-4">
+                                    <img *ngIf="postImg;" class="post-img" [src]="postImg">
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary pull-right" value="Post"> <fa  name="pencil-square-o"></fa>Write</button>
                             <div class="pull-right">
@@ -129,9 +134,7 @@
                                     <fa name="calendar"></fa>{{post.date}}
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -139,14 +142,3 @@
     </div>
 </div>
 <app-friends></app-friends>
-<!-- <div *ngIf='posts'>
-                    <div *ngFor='let post of posts' class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">By : {{post.author}} <span class="pull-right">Date : {{post.date}}</span></h3>
-                        </div>
-                        <div class="panel-body">
-                            {{post.content}}
-                            <button (click)="deletePost(post._id)" class="btn btn-default pull-right"> <fa name='trash-o' ></fa>Delete</button>
-                        </div>
-                    </div>
-                </div> -->

@@ -20,6 +20,7 @@ export class FriendprofileComponent implements OnInit {
   params: Params;
   username: string;
   posts: [any];
+  thoughtImg: any;
   constructor(
     private userService: UserService,
     private router: Router,
@@ -27,29 +28,17 @@ export class FriendprofileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-//     this.authService.getProfile().subscribe(profile => {
-//       this.user = profile.user;
-//       this.userService.getFriendsList(this.user).subscribe(friends => {this.friends = friends.friendsList;
-//         Array.from(new Set(this.friends)); }
-//       ); },
-// err => {
-//   console.log(err);
-//   return false;
-// });
+
     this.route.params.subscribe(params => {
       this.username = params['username'];
       this.userService.getFriendsProfile(this.username).subscribe(user => {
         this.user = user.user;
-        this.userService.getMyPosts(this.user).subscribe((res) => this.posts = res.posts);
+        this.userService.getMyPosts(this.user).subscribe((res) => {this.posts = res.posts;});
     }
   );
 }
 );
-  //   this.route.params.switchMap((params: Params) =>  this.userService.getFriendsProfile(params['username']))
-  //   .subscribe((user) => this.user = user);
-  // }
+
   }
-checkUser() {
-  console.log(this.user.username);
-}
+
 }
