@@ -109,6 +109,16 @@ addFriend(user ,friendUsername) {
     return res.json();
   });
 }
+    uploadPostImgToFirebase(event, uuid): firebase.Promise<any> {
+   const fileList: FileList = event.target.files;
+    const storageRef = firebase.storage().ref().child('postImgs/' + uuid + '.jpg');
+     if (fileList.length > 0) {
+        const file: File = fileList[0];
+        // storageRef.getDownloadURL().then(url => {this.updateAvatarInDb(user, url).subscribe(res => {}); });
+        return storageRef.put(file);
+     }
+}
+
 addPost(post) {
   const headers = new Headers();
   headers.append('Content-Type', 'application/json');

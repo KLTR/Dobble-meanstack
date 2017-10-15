@@ -6,7 +6,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-4">
-                    <input type="file" (change)="fileChangeEvent($event)" title=" " name="file" id="file" class="inputfile" />
+                    <input accept="image/*" type="file" (change)="fileChangeEvent($event)" title=" " name="file" id="file" class="inputfile" />
 
                     <div *ngIf="!userImg">
                         <img [src]="defaultImg" class="img-thumbnail img-circle" alt="">
@@ -39,11 +39,7 @@
                                     </div>
                                     <button (click)="addThought()" class="btn btn-primary pull-right"> <fa  name="pencil-square-o"></fa>Share Your Thought</button>
                                     <div class="pull-right">
-                                        <div class="btn-toolbar">
-                                            <!-- <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button>
-                                    <button type="button" class="btn btn-default"><i class="fa fa-file-image-o"></i>Image</button>
-                                    <button type="button" class="btn btn-default"><i class="fa fa-file-video-o"></i>Video</button> -->
-                                        </div>
+
                                     </div>
                                 </form>
                             </div>
@@ -67,9 +63,11 @@
                             <button type="submit" class="btn btn-primary pull-right" value="Post"> <fa  name="pencil-square-o"></fa>Write</button>
                             <div class="pull-right">
                                 <div class="btn-toolbar">
-                                    <!-- <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button>
+                                    <!-- <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button> -->
+
+                                    <input style="height:50px;width:90px" accept="image/*" type="file" (change)="uploadPostImg($event)" title=" " name="file" id="file" class="inputfile" />
                                     <button type="button" class="btn btn-default"><i class="fa fa-file-image-o"></i>Image</button>
-                                    <button type="button" class="btn btn-default"><i class="fa fa-file-video-o"></i>Video</button> -->
+                                    <!-- <button type="button" class="btn btn-default"><i class="fa fa-file-video-o"></i>Video</button> -->
                                 </div>
                             </div>
                         </form>
@@ -89,11 +87,17 @@
                                 </div>
                             </div>
                             <div class="col-md-10">
-                                <div class="bubble">
-                                    <div class="pointer">
-                                        <p>{{post.content}}</p>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="bubble row">
+                                            <div class="pointer col-md-8">
+                                                <p>{{post.content}}</p>
+                                            </div>
+                                            <div class="pointer-border col-md-4">
+                                                <img *ngIf="post.postImg;" class="post-img" [src]="post.postImg">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="pointer-border"></div>
                                 </div>
                                 <p class="post-actions"><a>Comment</a> - <a (click)="likePost(post._id)">Like</a> - <a (click)="deletePost(post._id)">Delete</a> </p>
                                 <form class="form-inline">

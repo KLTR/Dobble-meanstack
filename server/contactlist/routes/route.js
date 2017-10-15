@@ -84,6 +84,7 @@ router.post('/updateAvatar', (function(req, res, next) {
 
 ));
 
+
 // Authentication
 router.post('/authenticate', (function(req, res, next) {
     // user inserts username and password
@@ -154,8 +155,10 @@ router.post('/addPost', function(req, res, next) {
         author: req.body.author,
         content: req.body.content,
         userImg: req.body.avatar,
+        postImg: req.body.postImg,
         date: formatted
     });
+    console.log(newPost.postImg);
     Post.addPost(newPost, function(err, post) {
         if (err) {
             return err

@@ -5,8 +5,10 @@ import {Router} from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import {User} from '../../objects/user';
 import {FlashMessagesService} from 'angular2-flash-messages';
+import { UUID } from 'angular2-uuid';
 
-import { trigger,state,style,transition,animate,keyframes } from '@angular/animations';
+
+// import { trigger,state,style,transition,animate,keyframes } from '@angular/animations';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 
@@ -16,28 +18,28 @@ import 'rxjs/add/operator/map';
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  animations : [
-    trigger('myAnimation', [
-      state('small', style({
-        transform: 'scale(1)',
-      })),
-       state('large', style({
-        transform: 'scale(1.2)',
-      })),
+  // animations : [
+  //   trigger('myAnimation', [
+  //     state('small', style({
+  //       transform: 'scale(1)',
+  //     })),
+  //      state('large', style({
+  //       transform: 'scale(1.2)',
+  //     })),
 
-      transition('small => large', animate('300ms ease-in')),
-    ]),
-     trigger('flyInOut', [
-    state('in', style({transform: 'translateX(0)'})),
-    transition('void => *', [
-      style({transform: 'translateX(-100%)'}),
-      animate(100)
-    ]),
-    transition('* => void', [
-      animate(100, style({transform: 'translateX(100%)'}))
-    ])
-  ])
-  ]
+  //     transition('small => large', animate('300ms ease-in')),
+  //   ]),
+  //    trigger('flyInOut', [
+  //   state('in', style({transform: 'translateX(0)'})),
+  //   transition('void => *', [
+  //     style({transform: 'translateX(-100%)'}),
+  //     animate(100)
+  //   ]),
+  //   transition('* => void', [
+  //     animate(100, style({transform: 'translateX(100%)'}))
+  //   ])
+  // ])
+  // ]
 })
 export class ProfileComponent implements OnInit {
   user:  User;
@@ -52,8 +54,10 @@ export class ProfileComponent implements OnInit {
   storageRef: any;
   imgArr: Array<any>;
   content: String;
+  postImg: any;
   commentContent: String;
   posts: [any];
+  uuidv4: string ;
   state: string = 'small';
   constructor(
     private authService: AuthService,
@@ -89,11 +93,21 @@ export class ProfileComponent implements OnInit {
     this.userImg = undefined;
     this.userService.uploadToFirebase(event, this.user).then(() => this.getUrlFromFirebase(this.user.username));
   }
+
   getUrlFromFirebase(username) {
   const storageRef = firebase.storage().ref().child('userImgs/' + username + '-avatar.jpg');
-     storageRef.getDownloadURL().then(url => {this.userImg = url; });
+     storageRef.getDownloadURL().then(url => {this.userImg = url; this.postImg = url;});
     
   }
+
+  uploadPostImg(event){
+
+    this.uuidv4 = UUID.UUID();
+    console.log(this.uuidv4)
+    var postIndex = this.posts.length
+    this.userService.uploadPostImgToFirebase(event, this.uuidv4);
+  }
+
     sanitize(url: string) {
     return this.sanitizer.bypassSecurityTrustUrl(url);
 }
@@ -103,7 +117,6 @@ export class ProfileComponent implements OnInit {
       content: this.thoughtContent,
       img:this.thoughtImage
     }
-    console.log('add thought ..')
     this.userService.addThought(thought).subscribe();
        this.flashMessage.show('Sharing is Caring', {
       cssClass: 'alert alert-dismissible alert-success text-center',
@@ -112,14 +125,24 @@ export class ProfileComponent implements OnInit {
 
   }
 addPost() {
-  const post = {
+             this.flashMessage.show('Your friends thank you for keeping them updated', {
+      cssClass: 'alert alert-dismissible alert-success text-center',
+      timeout: 3000
+  });
+        const post = {
     author: this.user.username,
     content: this.content,
-    avatar: this.user.avatar
+    avatar: this.user.avatar,
+    postImg: ''
   };
   this.content = ' ';
-  this.userService.addPost(post).subscribe(res => { this.userService.getMyPosts(this.user).subscribe((res) => this.posts = res.posts);});
- 
+    const storageRef = firebase.storage().ref().child('postImgs/' + this.uuidv4 + '.jpg');
+    storageRef.getDownloadURL().then(url => {post.postImg = url;
+    this.userService.addPost(post).subscribe(res => { this.userService.getMyPosts(this.user).subscribe((res) => this.posts = res.posts);});
+ });
+
+
+
 }
 deletePost(id) {
   this.userService.deletePost(id).subscribe(res => {this.userService.getMyPosts(this.user).subscribe((res) => this.posts = res.posts);});

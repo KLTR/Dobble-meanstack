@@ -5,11 +5,17 @@
 
 .bubble {
     position: relative;
-    min-height: 110px;
+    min-height: 150px;
     padding: 15px;
     background: #fff;
     border-radius: 10px;
     border: 1px solid #ccc;
+    width: 100%;
+}
+
+.post-img {
+    height: 100%;
+    width: 100%;
 }
 
 a:hover {
